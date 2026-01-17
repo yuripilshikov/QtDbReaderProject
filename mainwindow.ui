@@ -14,9 +14,12 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout">
     <item>
      <widget class="QTableView" name="tableView"/>
+    </item>
+    <item>
+     <widget class="QTextBrowser" name="textBrowser"/>
     </item>
    </layout>
   </widget>
@@ -26,21 +29,21 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menudb">
     <property name="title">
      <string>db</string>
     </property>
-    <addaction name="actionConnect"/>
+    <addaction name="actionConnect_to_database"/>
    </widget>
    <addaction name="menudb"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionConnect">
+  <action name="actionConnect_to_database">
    <property name="text">
-    <string>Connect</string>
+    <string>Connect to database</string>
    </property>
   </action>
  </widget>

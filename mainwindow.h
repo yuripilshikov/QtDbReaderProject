@@ -18,11 +18,12 @@ public:
 
 
 private slots:
-    void on_actionConnect_triggered();
+    void onCellSelected(QModelIndex const& current, QModelIndex const& previous);
+    void connectDB();
 
 private:
     Ui::MainWindow *ui;
 
-    bool connectDB(QString const& filename);
+
 };
 #endif // MAINWINDOW_H
