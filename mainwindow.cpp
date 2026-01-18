@@ -10,6 +10,8 @@
 #include <QSqlRelationalTableModel>
 #include <QAbstractItemView>
 #include <QSqlRelationalDelegate>
+#include <QTableView>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -18,7 +20,10 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
+
     connect(ui->actionConnect_to_database, &QAction::triggered, this, &MainWindow::connectDB);
+    connect(this, &MainWindow::dbConnected, ui->queryWidget, &QueryModelWidget::showData);
+
 }
 
 MainWindow::~MainWindow()
@@ -35,6 +40,8 @@ void MainWindow::onCellSelected(const QModelIndex &current, const QModelIndex &p
 
         QModelIndex index = ui->tableView->model()->index(row, col);
         ui->textBrowser->setText(ui->tableView->model()->data(index).toString());
+        index = ui->tableView->model()->index(row, 5);
+        ui->textBrowser->append(ui->tableView->model()->data(index).toString());
     }
 }
 
@@ -49,6 +56,10 @@ void MainWindow::connectDB()
 
     if(db.open())
     {
+        emit dbConnected();
+
+
+
         // fill the form
         QSqlRelationalTableModel* model = new QSqlRelationalTableModel();
         model->setTable("algorithms");

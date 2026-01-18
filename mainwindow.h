@@ -15,7 +15,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-
+signals:
+    void dbConnected();
 
 private slots:
     void onCellSelected(QModelIndex const& current, QModelIndex const& previous);
