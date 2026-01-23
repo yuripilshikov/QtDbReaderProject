@@ -68,6 +68,7 @@
      <string>db</string>
     </property>
     <addaction name="actionConnect_to_database"/>
+    <addaction name="actionLoad_default_database"/>
    </widget>
    <addaction name="menudb"/>
   </widget>
@@ -75,6 +76,11 @@
   <action name="actionConnect_to_database">
    <property name="text">
     <string>Connect to database</string>
+   </property>
+  </action>
+  <action name="actionLoad_default_database">
+   <property name="text">
+    <string>Load default database</string>
    </property>
   </action>
  </widget>

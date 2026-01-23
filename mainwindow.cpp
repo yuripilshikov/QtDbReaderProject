@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     connect(ui->actionConnect_to_database, &QAction::triggered, this, &MainWindow::connectDB);
     connect(this, &MainWindow::dbConnected, ui->queryWidget, &QueryModelWidget::showData);
+    connect(ui->actionLoad_default_database, &QAction::triggered, this, &MainWindow::connectDefaultDB);
 
 }
 
@@ -84,3 +85,36 @@ void MainWindow::connectDB()
 
 }
 
+void MainWindow::connectDefaultDB()
+{
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(":/database/cppref_db.sqlite");
+
+    if(db.open())
+    {
+        emit dbConnected();
+
+
+
+        // fill the form
+        QSqlRelationalTableModel* model = new QSqlRelationalTableModel();
+        model->setTable("algorithms");
+        model->setRelation(2, QSqlRelation("standart", "id", "name"));
+
+        model->select();
+        ui->tableView->setModel(model);
+        ui->tableView->setItemDelegate(new QSqlRelationalDelegate(this));
+        // do not show description in table
+        ui->tableView->hideColumn(4);
+
+        // set status bar
+        ui->statusbar->showMessage("Opened database: " + db.databaseName());
+
+        // connect
+        connect(ui->tableView->selectionModel(), &QItemSelectionModel::currentChanged, this, &MainWindow::onCellSelected);
+    }
+    else
+    {
+        qDebug() << "error!";
+    }
+}
