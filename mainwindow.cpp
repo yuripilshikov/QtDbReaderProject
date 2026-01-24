@@ -13,18 +13,24 @@
 #include <QTableView>
 
 
+
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
-    ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
-
     connect(ui->actionConnect_to_database, &QAction::triggered, this, &MainWindow::connectDB);
-    connect(this, &MainWindow::dbConnected, ui->queryWidget, &QueryModelWidget::showData);
-    connect(ui->actionLoad_default_database, &QAction::triggered, this, &MainWindow::connectDefaultDB);
 
+    // init query widget
+    connect(this, &MainWindow::dbConnected, ui->queryWidget, &QueryModelWidget::showData);
+
+    // init table widget
+    connect(this, &MainWindow::dbConnected, ui->tableWidget, &TableModelWidget::init);
+
+    // init relational table widget
+    connect(this, &MainWindow::dbConnected, ui->relationalWidget, &RelationalModelWidget::init);
 }
 
 MainWindow::~MainWindow()
@@ -32,19 +38,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::onCellSelected(const QModelIndex &current, const QModelIndex &previous)
-{
-    if(current.isValid())
-    {
-        int row = current.row();
-        int col = 4;//current.column();
-
-        QModelIndex index = ui->tableView->model()->index(row, col);
-        ui->textBrowser->setText(ui->tableView->model()->data(index).toString());
-        index = ui->tableView->model()->index(row, 5);
-        ui->textBrowser->append(ui->tableView->model()->data(index).toString());
-    }
-}
 
 void MainWindow::connectDB()
 {
@@ -58,25 +51,7 @@ void MainWindow::connectDB()
     if(db.open())
     {
         emit dbConnected();
-
-
-
-        // fill the form
-        QSqlRelationalTableModel* model = new QSqlRelationalTableModel();
-        model->setTable("algorithms");
-        model->setRelation(2, QSqlRelation("standart", "id", "name"));
-
-        model->select();
-        ui->tableView->setModel(model);
-        ui->tableView->setItemDelegate(new QSqlRelationalDelegate(this));
-        // do not show description in table
-        ui->tableView->hideColumn(4);
-
-        // set status bar
         ui->statusbar->showMessage("Opened database: " + db.databaseName());
-
-        // connect
-        connect(ui->tableView->selectionModel(), &QItemSelectionModel::currentChanged, this, &MainWindow::onCellSelected);
     }
     else
     {
@@ -85,36 +60,3 @@ void MainWindow::connectDB()
 
 }
 
-void MainWindow::connectDefaultDB()
-{
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(":/database/cppref_db.sqlite");
-
-    if(db.open())
-    {
-        emit dbConnected();
-
-
-
-        // fill the form
-        QSqlRelationalTableModel* model = new QSqlRelationalTableModel();
-        model->setTable("algorithms");
-        model->setRelation(2, QSqlRelation("standart", "id", "name"));
-
-        model->select();
-        ui->tableView->setModel(model);
-        ui->tableView->setItemDelegate(new QSqlRelationalDelegate(this));
-        // do not show description in table
-        ui->tableView->hideColumn(4);
-
-        // set status bar
-        ui->statusbar->showMessage("Opened database: " + db.databaseName());
-
-        // connect
-        connect(ui->tableView->selectionModel(), &QItemSelectionModel::currentChanged, this, &MainWindow::onCellSelected);
-    }
-    else
-    {
-        qDebug() << "error!";
-    }
-}

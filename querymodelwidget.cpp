@@ -23,15 +23,12 @@ QueryModelWidget::~QueryModelWidget()
 
 void QueryModelWidget::showData()
 {
-    qDebug() << "QueryModelwidget!";
+    //qDebug() << "QueryModelwidget!";
 
     QSqlQueryModel* standards = new QSqlQueryModel(this);
     standards->setQuery("SELECT id FROM standart");
     ui->cbStandard->setModel(standards);
-
-    qDebug() << ui->cbStandard->currentText();
-
-    showForDesiredStandard(ui->cbStandard->currentText());
+    //showForDesiredStandard(ui->cbStandard->currentText());
     ui->listView->setModel(m_model);
     connect(ui->listView->selectionModel(), &QItemSelectionModel::currentChanged, this, &QueryModelWidget::handleCurrentChanged);
 
@@ -40,11 +37,11 @@ void QueryModelWidget::showData()
 
 void QueryModelWidget::showForDesiredStandard(const QString& standard)
 {
-    qDebug() << "show for desired standard " << standard;
+    //qDebug() << "show for desired standard " << standard;
     QSqlQuery query;
     query.prepare("SELECT name FROM algorithms WHERE stantart = :st");
     query.bindValue(":st", ui->cbStandard->currentText());
-    query.exec(); // ??? does not work without this
+    query.exec();
     m_model->setQuery(query);
 }
 

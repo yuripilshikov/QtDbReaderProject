@@ -18,20 +18,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    querymodelwidget.cpp
+    querymodelwidget.cpp \
+    relationalmodelwidget.cpp \
+    tablemodelwidget.cpp
 
 HEADERS += \
     mainwindow.h \
-    querymodelwidget.h
+    querymodelwidget.h \
+    relationalmodelwidget.h \
+    tablemodelwidget.h
 
 FORMS += \
     mainwindow.ui \
-    querymodelwidget.ui
+    querymodelwidget.ui \
+    relationalmodelwidget.ui \
+    tablemodelwidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-RESOURCES += \
-    resources.qrc
+RESOURCES +=

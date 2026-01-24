@@ -19,9 +19,7 @@ signals:
     void dbConnected();
 
 private slots:
-    void onCellSelected(QModelIndex const& current, QModelIndex const& previous);
     void connectDB();
-    void connectDefaultDB();
 
 private:
     Ui::MainWindow *ui;
