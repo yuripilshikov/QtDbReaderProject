@@ -19,6 +19,8 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     mysqlquerymodel.cpp \
+    mysqlrelationaldelegate.cpp \
+    mysqltablemodel.cpp \
     querymodelwidget.cpp \
     relationalmodelwidget.cpp \
     tablemodelwidget.cpp
@@ -26,6 +28,8 @@ SOURCES += \
 HEADERS += \
     mainwindow.h \
     mysqlquerymodel.h \
+    mysqlrelationaldelegate.h \
+    mysqltablemodel.h \
     querymodelwidget.h \
     relationalmodelwidget.h \
     tablemodelwidget.h

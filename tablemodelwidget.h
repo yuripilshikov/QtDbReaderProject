@@ -2,6 +2,7 @@
 #define TABLEMODELWIDGET_H
 
 #include <QWidget>
+#include "mysqltablemodel.h"
 
 class QSqlTableModel;
 
@@ -20,7 +21,8 @@ public:
 private:
     Ui::TableModelWidget *ui;
 
-    QSqlTableModel* m_model;
+    //QSqlTableModel* m_model;
+    MySqlTableModel* m_model;
 
 public slots:
     void init();
