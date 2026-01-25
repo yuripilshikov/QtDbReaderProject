@@ -18,12 +18,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    mysqlquerymodel.cpp \
     querymodelwidget.cpp \
     relationalmodelwidget.cpp \
     tablemodelwidget.cpp
 
 HEADERS += \
     mainwindow.h \
+    mysqlquerymodel.h \
     querymodelwidget.h \
     relationalmodelwidget.h \
     tablemodelwidget.h
@@ -39,4 +41,8 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-RESOURCES +=
+RESOURCES += \
+    resources.qrc
+
+DISTFILES += \
+    README.MD

@@ -1,5 +1,5 @@
 <RCC>
-    <qresource prefix="/database">
-        <file>cppref_db.sqlite</file>
+    <qresource prefix="/icons">
+        <file>violetIcon.png</file>
     </qresource>
 </RCC>

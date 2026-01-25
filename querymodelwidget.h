@@ -2,6 +2,7 @@
 #define QUERYMODELWIDGET_H
 
 #include <QWidget>
+#include "mysqlquerymodel.h"
 
 class QSqlQueryModel;
 
@@ -19,7 +20,8 @@ public:
 
 private:
     Ui::QueryModelWidget *ui;
-    QSqlQueryModel* m_model;
+    //QSqlQueryModel* m_model;
+    MySqlQueryModel* m_model;
 
 public slots:
     void showData();
