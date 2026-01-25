@@ -1,4 +1,4 @@
-QT       += core gui sql
+QT       += core gui sql charts
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -23,6 +23,7 @@ SOURCES += \
     mysqltablemodel.cpp \
     querymodelwidget.cpp \
     relationalmodelwidget.cpp \
+    statisticswidget.cpp \
     tablemodelwidget.cpp
 
 HEADERS += \
@@ -32,12 +33,14 @@ HEADERS += \
     mysqltablemodel.h \
     querymodelwidget.h \
     relationalmodelwidget.h \
+    statisticswidget.h \
     tablemodelwidget.h
 
 FORMS += \
     mainwindow.ui \
     querymodelwidget.ui \
     relationalmodelwidget.ui \
+    statisticswidget.ui \
     tablemodelwidget.ui
 
 # Default rules for deployment.

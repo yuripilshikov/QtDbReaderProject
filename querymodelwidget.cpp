@@ -41,7 +41,6 @@ void QueryModelWidget::showForDesiredStandard(const QString& standard)
 
 void QueryModelWidget::handleCurrentChanged(const QModelIndex &current, const QModelIndex &previous)
 {
-    qDebug() << ui->listView->model()->data(current);
     ui->textBrowser->clear();
     QSqlQuery query;
     query.prepare("SELECT description, signature, snippet FROM algorithms WHERE stantart = :st AND name = :nm");
