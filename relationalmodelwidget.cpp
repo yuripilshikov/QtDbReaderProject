@@ -22,7 +22,7 @@ RelationalModelWidget::~RelationalModelWidget()
 
 void RelationalModelWidget::init()
 {
-    //m_model = new QSqlRelationalTableModel(); MySqlRelationalTableModel
+    //m_model = new QSqlRelationalTableModel(); //MySqlRelationalTableModel
     m_model = new MySqlRelationalTableModel();
     m_model->setTable("algorithms");
     m_model->setRelation(2, QSqlRelation("standart", "id", "name"));
@@ -30,8 +30,10 @@ void RelationalModelWidget::init()
     m_model->select();
 
     ui->tableView->setModel(m_model);
-    ui->tableView->setItemDelegate(new MySqlRelationalDelegate(this));
+    //ui->tableView->setItemDelegate(new MySqlRelationalDelegate(this));
+    ui->tableView->setItemDelegate(new QSqlRelationalDelegate(this));
 
+    ui->tableView->hideColumn(0);
     ui->tableView->hideColumn(3);
     ui->tableView->hideColumn(4);
     ui->tableView->hideColumn(5);
