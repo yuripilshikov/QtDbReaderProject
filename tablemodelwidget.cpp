@@ -28,8 +28,7 @@ void TableModelWidget::init()
     QSqlQueryModel* standards = new QSqlQueryModel(this);
     standards->setQuery("SELECT id FROM standart");
     ui->cbStandard->setModel(standards); // here emits the signal, calling showForDesiredStandard
-    connect(ui->listView->selectionModel(), &QItemSelectionModel::currentChanged, this, &TableModelWidget::handleCurrentChanged);
-    connect(ui->tableView->selectionModel(), &QItemSelectionModel::currentChanged, this, &TableModelWidget::handleCurrentChanged);
+    connect(ui->listView->selectionModel(), &QItemSelectionModel::currentChanged, this, &TableModelWidget::handleCurrentChanged);    
 }
 
 void TableModelWidget::showForDesiredStandard(const QString &standard)
@@ -40,13 +39,6 @@ void TableModelWidget::showForDesiredStandard(const QString &standard)
     m_model->setFilter(filter);
     m_model->select();
     ui->listView->setModel(m_model);
-    ui->tableView->setModel(m_model);
-    ui->tableView->hideColumn(0);
-    ui->tableView->hideColumn(2);
-    ui->tableView->hideColumn(3);
-    ui->tableView->hideColumn(4);
-    ui->tableView->hideColumn(5);
-    ui->tableView->hideColumn(6);
 }
 
 void TableModelWidget::handleCurrentChanged(const QModelIndex &current, const QModelIndex &previous)

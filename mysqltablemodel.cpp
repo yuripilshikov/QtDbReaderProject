@@ -6,14 +6,16 @@ MySqlTableModel::MySqlTableModel(QObject *parent)
 
 }
 
-
 QVariant MySqlTableModel::data(const QModelIndex &index, int role) const
 {
     switch(role)
     {
     case Qt::DisplayRole:
         //return QSqlTableModel::data(index, Qt::DisplayRole);
-        return QSqlTableModel::data(this->index(index.row(), 1), Qt::DisplayRole);
+        if(index.column() == 0)
+            return QSqlTableModel::data(this->index(index.row(), 1), Qt::DisplayRole);
+        else
+            return QSqlTableModel::data(index, Qt::DisplayRole);
     case Qt::ToolTipRole:
         return QSqlTableModel::data(this->index(index.row(), 4));
     case Qt::DecorationRole:

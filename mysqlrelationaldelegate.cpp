@@ -31,8 +31,6 @@ void MySqlRelationalDelegate::paint(QPainter *painter, const QStyleOptionViewIte
         else if (index.data() == "C++23") painter->fillRect(rec, cpp23);
     }
 
-
-
     // paint selected
     painter->save();
     if(bool(option.state & QStyle::State_Selected))

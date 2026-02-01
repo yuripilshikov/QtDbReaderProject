@@ -5,6 +5,7 @@
 #include <QSqlRelationalDelegate>
 
 #include "mysqlrelationaldelegate.h"
+#include "mysqlrelationaltablemodel.h"
 
 RelationalModelWidget::RelationalModelWidget(QWidget *parent) :
     QWidget(parent),
@@ -21,7 +22,8 @@ RelationalModelWidget::~RelationalModelWidget()
 
 void RelationalModelWidget::init()
 {
-    m_model = new QSqlRelationalTableModel();
+    //m_model = new QSqlRelationalTableModel(); MySqlRelationalTableModel
+    m_model = new MySqlRelationalTableModel();
     m_model->setTable("algorithms");
     m_model->setRelation(2, QSqlRelation("standart", "id", "name"));
 
