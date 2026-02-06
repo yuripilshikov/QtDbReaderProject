@@ -18,6 +18,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    myproxymodel.cpp \
+    myproxymodelwidget.cpp \
     mysqlquerymodel.cpp \
     mysqlrelationaldelegate.cpp \
     mysqlrelationaltablemodel.cpp \
@@ -29,6 +31,8 @@ SOURCES += \
 
 HEADERS += \
     mainwindow.h \
+    myproxymodel.h \
+    myproxymodelwidget.h \
     mysqlquerymodel.h \
     mysqlrelationaldelegate.h \
     mysqlrelationaltablemodel.h \
@@ -40,6 +44,7 @@ HEADERS += \
 
 FORMS += \
     mainwindow.ui \
+    myproxymodelwidget.ui \
     querymodelwidget.ui \
     relationalmodelwidget.ui \
     statisticswidget.ui \

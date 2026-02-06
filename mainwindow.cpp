@@ -32,6 +32,9 @@ MainWindow::MainWindow(QWidget *parent)
     // init relational table widget
     connect(this, &MainWindow::dbConnected, ui->relationalWidget, &RelationalModelWidget::init);
 
+    // init proxy model widget
+    connect(this, &MainWindow::dbConnected, ui->widget_2, &MyProxyModelWidget::init);
+
     // init statistics
     connect(this, &MainWindow::dbConnected, ui->widget, &StatisticsWidget::init);
 }
